@@ -1,0 +1,83 @@
+﻿@model ThePlaceToMeet.Models.Domain.Reservatie
+
+@{
+    ViewData["Title"] = "Bevestiging";
+}
+
+<h2>Bevestiging reservatie</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Dag
+        </dt>
+        <dd>
+            @Model.Dag.ToShortDateString()
+        </dd>
+        <dt>
+            Van
+        </dt>
+        <dd>
+            @Model.BeginUur u
+        </dd>
+        <dt>
+            Tot
+        </dt>
+        <dd>
+            @Model.Tot u
+        </dd>
+        <dt>
+            Aantal personen
+        </dt>
+        <dd>
+            @Model.AantalPersonen
+        </dd>
+        <dt>
+            Prijs voor de ruimte per u
+        </dt>
+        <dd>
+            @($"{Model.PrijsPerUur:N2} €")
+        </dd>
+        <dt>
+            Prijs per persoon voor de standaard catering
+        </dt>
+
+        @if (Model.PrijsPerPersoonStandaardCatering != 0)
+        {
+            <dd>
+                @($"{Model.PrijsPerPersoonStandaardCatering:N2} €")
+            </dd>
+        }
+        else
+        {
+            <dd>niet voorzien</dd>
+        }
+
+        @if (Model.Catering != null)
+        {
+            <dt>
+                Prijs per persoon voor @Model.Catering.Titel
+            </dt>
+            <dd>
+                @($"{Model.PrijsPerPersoonCatering:N2} €")
+            </dd>
+        }
+        <dt>
+            Percentage korting
+        </dt>
+        <dd>
+            @(Model.Korting != null ? $"{Model.Korting.Percentage} %" : "")
+        </dd>
+        <dt>
+            Totale prijs
+        </dt>
+        <dd>
+            @($"{Model.TotalePrijs:N2} €")
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <a asp-action="Index">Terug naar overzicht</a>
+</div>
